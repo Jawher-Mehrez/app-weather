@@ -1,0 +1,67 @@
+dependencies {}
+
+flutter {
+    source '../..'
+}
+
+android {
+    buildTypes {
+        release {
+            signingConfig signingConfigs.debug
+        }
+    }
+
+    defaultConfig {
+        versionName flutterVersionName
+        versionCode flutterVersionCode.toInteger()
+        targetSdkVersion flutter.targetSdkVersion
+        minSdkVersion 21
+        applicationId "com.example.weather_app"
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+
+    ndkVersion "25.1.8937393"
+    compileSdk flutter.compileSdkVersion
+    namespace "com.example.weather_app"
+}
+
+def flutterVersionName = '1.0'
+def flutterVersionCode = '1'
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+if (localProperties.getProperty('flutter.versionName') == null) {
+    flutterVersionName = '1.0'
+} else {
+    flutterVersionName = localProperties.getProperty('flutter.versionName')
+}
+
+if (localProperties.getProperty('flutter.versionCode') == null) {
+    flutterVersionCode = '1'
+} else {
+    flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+}
+
+plugins {
+    id "dev.flutter.flutter-gradle-plugin"
+    id "kotlin-android"
+    id "com.android.application"
+}
